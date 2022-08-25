@@ -7,9 +7,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./vendor/font/css/all.min.css">
     <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./../vendor/bootstrap/js/bootstrap.min.js"></script>
     <title>Gestion conges contrats </title>
 
 <body>
@@ -81,14 +82,14 @@
         </div>
     </div>
 
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" style="background-color:rgb(234, 234, 247);">
         <div class="container" data-aos="fade-up">
-
-            <div class="section-title">
-                <h2>Contact</h2>
-                <p>Contacter Nous pour plus d'infos</p>
-            </div>
-
+            <center>
+                <br><br>
+                <div class="section-title">
+                    <h2>Contact Nous!!!!!</h2>
+                </div><br><br>
+            </center>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
 
                 <div class="col-lg-6">
@@ -96,23 +97,23 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="info-box">
-                                <i class="bx bx-map"></i>
+                                <i class="fas fa-map"></i>
                                 <h3>Notre Adresse</h3>
                                 <p>Dschang Immeuble SOCINAN Total marche B </p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info-box mt-4">
-                                <i class="bx bx-envelope"></i>
+                            <i class="fas fa-envelope"></i>
                                 <h3>Adresses Emails</h3>
-                                <p>franck@gmail.com<br>sorel@gmail.com</p>
+                                  <p>franck@gmail.com<br>sorel@gmail.com</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info-box mt-4">
-                                <i class="bx bx-phone-call"></i>
+                            <i class="fas fa-phone"></i>
                                 <h3>Contacter Nous</h3>
-                                <p>+237 673 869 461<br>+237 690 075 615</p>
+                                <p> +237 673 869 461<br>+237 690 075 615</p>
                             </div>
                         </div>
                     </div>
@@ -123,16 +124,20 @@
                     <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                         <div class="row">
                             <div class="col form-group">
+                                <label for="">Nom</label>
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Votre nom" required>
                             </div>
                             <div class="col form-group">
+                                <label for="">Email</label>
                                 <input type="email" class="form-control" name="email" id="email" placeholder="votre Email" required>
                             </div>
-                        </div>
+                        </div><br>
                         <div class="form-group">
+                            <label for="">Sujet</label>
                             <input type="text" class="form-control" name="subject" id="subject" placeholder="Sujet" required>
-                        </div>
+                        </div><br>
                         <div class="form-group">
+                            <label for="">Message</label>
                             <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                         </div>
                         <div class="my-3">
@@ -146,7 +151,7 @@
 
             </div>
 
-        </div>
+        </div><br><br>
     </section><!-- End Contact Section -->
 
 
@@ -208,6 +213,8 @@
                 </div>
             </div>
     </footer>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fas fa-arrow"></i></a>
+
 </body>
 
 </html>
