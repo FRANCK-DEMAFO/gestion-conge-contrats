@@ -47,7 +47,7 @@ if (isset($_SESSION['pass']) && ($_SESSION['login'])) {
           <hr>
           <ul class="navlist">
 
-            <li class="navitems"><a href="./../../Accuiel.php" class="navlink"><i class="fas fa-house"></i>Accueil</a></li>
+            <li class="navitems"><a href="./../../index.php" class="navlink"><i class="fas fa-house"></i>Accueil</a></li>
             <li class="navitems"><a href="./../source/dashboard.php" class="navlink"><i class="fa fa-list"></i>Tableau de Bord</a></li>
             <li class="navitems"><a href="./../source/IndexEmployes.php" class="navlink"><i class="fa fa-users"></i>Employes</a></li>
             <li class="navitems"><a href="./../source/index.php" class="navlink"><i class="fas fa-clipboard"></i>conges</a></li>

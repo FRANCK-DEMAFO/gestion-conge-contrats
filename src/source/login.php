@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
 
         if ($q->rowCount() > 0) {
             $data = $q->fetchall();
-            $_SESSION['pass']=$data[0]['password'];
+            $_SESSION['pass'] = $data[0]['password'];
             if ($_SESSION['pass'] == $pass) {
                 $_SESSION['mail'] = $data[0]['mail'];
                 $_SESSION['name'] = $data[0]['name'];
@@ -49,10 +49,22 @@ if (isset($_POST['login'])) {
 </head>
 
 <body>
-    <?php
-    // if(isset($))
-
-    ?>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="./../../assets/images/cropped-logo-uni2grow-1.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a style="margin-left:600px;" class="nav-link" aria-current="page" href="./../../index.php">Acceuil</a>
+                        <a class="nav-link active bg-danger" href="login.php">Connectez-vous</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-6 d-flex flex-column align-items-center justify-content-center">
@@ -60,8 +72,7 @@ if (isset($_POST['login'])) {
                     <div class="card-body">
 
                         <div class="pt-4 pb-2">
-                            <img style="margin-left:100px;" src="./../../assets/images/cropped-logo-uni2grow-1.png" alt=""><br><br>
-                            <h2 class="card-title text-center ">Connectez-vous</h2>
+                            <h2 class="card-title text-center ">Connectez-vous</h2><br><br>
                         </div>
                         <form method="post" action="" class="row g-3 needs-validation">
                             <?php
