@@ -5,7 +5,7 @@ cc'est une simple application pour le management des contrats, congés et permis
 Installation
 
 Cloner le repertoire 
-git clone https://github.com/FRANCK-DEMAFO/projet-final.git
+git clone https://github.com/FRANCK-DEMAFO/gestion-conge-contrats.git
 Installer la base de données
 
 config->schema->schema/gestion_conges_contrats.sql. creer la base de données et importer le fichier gestion_conges_contrats.sql.
@@ -19,7 +19,7 @@ Exemple
 
 
 Cloner le repertoire:
-git clone https://github.com/FRANCK-DEMAFO/projet-final.git
+git clone https://github.com/FRANCK-DEMAFO/gestion-conge-contrats.git
 après l'import vous entrer dans config a la racine du projet 
 
 [
