@@ -5,9 +5,17 @@ $_SESSION['title'] = "Liste des employés";
 <link rel="stylesheet" href="./style.css">
 <div class="container admin">
   <div class="row">
+  <h1 class="text-logo" style="text-align: center; margin-top: -10px; background-color: brown;">Gestion des Employes</h1><br><br><br><br>
     <h1><strong>Liste des employés </strong><a href="InsertEmplyes.php" class="btn btn-success btn-lg">
-
         <i class="fas fa-plus"></i>Ajouter</a></h1>
+        <?php
+          if (!empty($_SESSION['erreur'])) {
+              echo '<div class="alert alert-success" role="alert" aria-label="Close">
+                      ' . $_SESSION['erreur'] . ' 
+                      </div>';
+              $_SESSION['erreur'] = "";
+          }
+         ?>
     <div class="table-responsive">
       <table class="table table-striped table-bordered" id="employe">
         <thead>

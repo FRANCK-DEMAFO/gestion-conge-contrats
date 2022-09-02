@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require('./../../core/Database/connection.php');
 $conn = (new Database())->getConnection();
@@ -7,7 +8,7 @@ $conn = (new Database())->getConnection();
     $id=$_GET['id'];
        $q = $conn->prepare("UPDATE `employes` SET desactivate='0' WHERE id_employee =$id");
        $q->execute();
-       
+       $_SESSION['erreur'] = "<center>Employé suprimer</center>";
    }
    header("Location: IndexEmployes.php");
   

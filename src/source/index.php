@@ -1,12 +1,9 @@
 <?php
-require('./../view/includes/header.php');
+
 $_SESSION['title'] = "Liste des congés";
+require_once('./../view/includes/header.php');
+
 ?>
-
-
-<!-- ajouter un employe -->
-
-
 
 <div class="container">
   <div class="row">
@@ -19,27 +16,51 @@ $_SESSION['title'] = "Liste des congés";
       <div style="min-height: 120px;">
         <div class="collapse collapse-vertical" id="collapseWidthExample">
           <div class="card card-body" style="width: 300px;">
-            <div class="form-group">
-              <label for="name">
-                <h6>Veillez entrer l'année </h6>
-              </label>
-              <input type="date" class="form-control" value="" id="archive" name="archive"  placeholder="jj/mm/aa">
-              <a class="btn btn-info" href="Archives.php" name="archive">Envoyer</a>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><a href="index.php">retour</a></button>
-            </div>
+            <form method="POST" action="Archives.php">
+              <div class="form-group">
+                <label for="name">
+                  <h6>Veillez entrer l'année </h6>
+                </label>
+                <script>
+                  document.querySelector("input[type=number]")
+                    .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
+                </script>
+                <input class="form-control" type="number" placeholder="yy" min="2022" max="2100" id="annee" name="annee" required>
+                <button class="btn btn-success" type="submit" name="envoyer">envoyer</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal"><a href="index.php">retour</a></button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+      <button class="btn btn-info"><a href="update_leaves.php">Actualiser</a></button>
     </h1>
     <div class="table-responsive">
       <table class="table table-striped table-bordered" id="leave">
+        <?php
+        if (!empty($_SESSION['erreur'])) {
+          echo '<div class="alert alert-danger" role="alert">
+                                        ' . $_SESSION['erreur'] . ' 
+                                        </div>';
+          $_SESSION['erreur'] = "";
+        }
+        if (!empty($_SESSION['success'])) {
+          echo '<div class="alert alert-success" role="alert">
+                                      ' . $_SESSION['success'] . ' 
+                                      </div>';
+          $_SESSION['success'] = "";
+        }
+
+        ?>
         <thead>
           <tr>
             <th>ID</th>
-            <th> Nom de l'employe</th>
-            <th>Date de debut</th>
-            <th>Nombre de jours</th>
-            <th>Action</th>
+            <th style="text-align: center;"> Nom des employes</th>
+            <th style="text-align: center;">Date de debut</th>
+            <th style="text-align: center;">Nombre de jours</th>
+            <th style="text-align: center;">Duree</th>
+            <th style="text-align: center;">Nombre de jours restant</th>
+            <th style="text-align: center;">Action</th>
 
 
           </tr>
@@ -48,19 +69,27 @@ $_SESSION['title'] = "Liste des congés";
           <?php
           require('./../../core/Database/connection.php');
           $conn = (new Database())->getConnection();
-          $q = $conn->prepare("SElECT conges.id_leave, conges.leave_start_date, conges.statut, conges.leave_duration, conges.id_employee,
-                        employes.name FROM conges LEFT JOIN employes ON conges.id_employee=employes.id_employee WHERE conges.disable=1");
-          $q->execute();
+
+          $sql = "SElECT conges.id_leave, conges.leave_start_date, conges.annee, conges.leave_days, conges.used_days, conges.statut, conges.leave_duration, conges.id_employee,
+          employes.name FROM conges LEFT JOIN employes ON conges.id_employee=employes.id_employee WHERE conges.disable = :disable AND conges.annee = :annee";
+
+          $query = $conn->prepare($sql);
+          $query->bindValue(':disable', 1, \PDO::PARAM_INT);
+          $query->bindValue(':annee', date('Y'), \PDO::PARAM_INT);
+          $query->execute();
           $qemploye = $conn->query('SELECT * FROM employes');
 
-          foreach ($q as $conge) {
+          foreach ($query as $conge) {
             $qemploye1 = $conn->query('SELECT * FROM employes');
           ?>
             <tr>
               <td><?= $conge['id_leave'] ?></td>
-              <td><?= $conge['name'] ?></td>
+              <td style="text-align: center;"><?= $conge['name'] ?></td>
               <td><?= $conge['leave_start_date'] ?></td>
-              <td><?= $conge['leave_duration'] ?></td>
+              <td style="text-align: center;"><?= $conge['leave_days'] ?></td>
+              <td style="text-align: center;"><?= $conge['leave_duration'] ?></td>
+              <td style="text-align: center;"><?= $diff = $conge['leave_days'] - ($conge['used_days']) - $conge['leave_duration']; ?></td>
+
               <td width=160>
                 <a class="btn btn-light" href="view.php?id=<?= $conge['id_leave'] ?>"><i class="fas fa-eye"></i> </a>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $conge['id_leave'] ?>"><i class="fas fa-trash"></i></button>
@@ -112,13 +141,13 @@ $_SESSION['title'] = "Liste des congés";
                               </div><br>
                               <div class="form-group">
                                 <label for="leave_duration"><strong>Duree du conge</strong></label>
-                                <input type="number" class="form-control" id="leave_duration" value="<?= $conge['leave_duration'] ?>" name="leave_duration" placeholder="" required>
+                                <input type="number" class="form-control" id="" value="<?= $conge['leave_duration'] ?>" name="leave_duration" placeholder="" required>
                               </div><br>
 
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="submit" name="send" class="btn btn-success" href="delete.php?id=<?php $conge['id_leave'] ?>">Modifier</button>
+                          <button type="submit" name="send" class="btn btn-success" href="update.php?id=<?php $conge['id_leave'] ?>">Modifier</button>
                           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Non</button>
                         </div>
                         </form>
@@ -178,4 +207,7 @@ $_SESSION['title'] = "Liste des congés";
 <script type="text/javascript">
   $("#leave").dataTable({});
 </script>
-<?php require('./../view/includes/footer.php') ?>
+<?php
+
+require('./../view/includes/footer.php');
+?>

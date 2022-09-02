@@ -29,23 +29,23 @@ require('./../../core/Database/connection.php');
                 <br>
                 <form>
                     <div class="form-groupe">
-                        <label>Nom:</label><?=' '.$employes['name']; ?>
+                        <strong><label>Nom:</label></strong><?=' '.$employes['name']; ?>
                     </div>
                     <br>
                     <div class="form-groupe">
-                        <label>Prenom:</label><?=' '.$employes['surname']; ?>
+                        <strong><label>Prenom:</label></strong><?=' '.$employes['surname']; ?>
                     </div>
                     <br>
                     <div class="form-groupe">
-                        <label>Status:</label><?=' '.$employes['marital_status']; ?>
+                        <strong><label>Status:</label></strong><?=' '.$employes['marital_status']; ?>
                     </div>
                     <br>
                     <div class="form-groupe">
-                        <label>role:</label><?=' '.$employes['id_role']; ?>
+                        <strong><label>role:</label></strong><?=' '.$employes['id_role']; ?>
                     </div>
                     <br>
                     <div class="form-groupe">
-                        <label>Date debut:</label><?=' '.$employes['begin_date']; ?>
+                        <strong><label>Date debut:</label></strong><?=' '.$employes['begin_date']; ?>
                     </div>
                 </form>
                 <br>
@@ -56,7 +56,7 @@ require('./../../core/Database/connection.php');
             </div>
             <div class="col-sm-6">
                 <div class="thumbnail">
-                    <img src= "<?= './../../assets/images/'. $employes['photo'] ; ?>" width =80% height=80% >
+                    <img class="rounded-circle" src= "<?= './../../assets/images/'. $employes['photo'] ; ?>" width =80% height=80% >
 
                 </div>
             </div>

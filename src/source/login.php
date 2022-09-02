@@ -14,11 +14,14 @@ if (isset($_POST['login'])) {
             $data = $q->fetchall();
             $_SESSION['pass'] = $data[0]['password'];
             if ($_SESSION['pass'] == $pass) {
+                $_SESSION['id_employee'] = $data[0]['id_employee'];
+                $_SESSION['role'] = $data[0]['id_role'];
                 $_SESSION['mail'] = $data[0]['mail'];
                 $_SESSION['name'] = $data[0]['name'];
+                $_SESSION['photo'] = $data[0]['photo'];
                 $_SESSION['surname'] = $data[0]['surname'];
                 $_SESSION['login'] = $data[0]['login'];
-                // $_SESSION['erreur'] = "connexion reussi a ". $_SESSION['name'];
+                //  $_SESSION['erreur'] = "connexion reussi a ". $_SESSION['id_employee'];
                 header('Location:dashboard.php');
             } else {
                 $_SESSION['erreur'] = "Mots de passe incorrect !";
@@ -77,10 +80,18 @@ if (isset($_POST['login'])) {
                         <form method="post" action="" class="row g-3 needs-validation">
                             <?php
                             if (!empty($_SESSION['erreur'])) {
-                                echo '<div class="alert alert-danger" role="alert">
+                                echo '<div class="alert alert-danger" role="alert" aria-label="Close">
                                         ' . $_SESSION['erreur'] . ' 
                                         </div>';
                                 $_SESSION['erreur'] = "";
+                            }
+                            ?>
+                            <?php
+                            if (!empty($_SESSION['erreur1'])) {
+                                echo '<div class="alert alert-success" role="alert" aria-label="Close">
+                                        ' . $_SESSION['erreur1'] . ' 
+                                        </div>';
+                                $_SESSION['erreur1'] = "";
                             }
                             ?>
                             <div class="col-12">

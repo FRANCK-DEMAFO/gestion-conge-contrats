@@ -10,7 +10,7 @@ $conn = (new Database())->getConnection();
 
 if (isset($_POST['submit'])) {
 
-	print_r($_POST);
+	// print_r($_POST);
 
 	$creation_date = date('Y-m-d H:i:s');
 	$start_date = htmlentities($_POST['start_date']);
@@ -36,7 +36,10 @@ if (isset($_POST['submit'])) {
 	$q->bindValue(':deleted', 0, \PDO::PARAM_BOOL);
 	$q->execute();
 
-	header("Location: IndexContrat.php");
+	header('Location: IndexContrat.php');
+
+	$_SESSION['erreur']='<center>ajout effectuer</center>';
+
 }
 
 ?>
@@ -45,7 +48,7 @@ if (isset($_POST['submit'])) {
 	<div class="row">
 		<div class="col-md-12 m-auto">
 			<div class="section">
-				<form action="" method="post">
+				<form action="Ajoutercontrat.php" method="post">
 
 					<div class="font1">
 
@@ -85,7 +88,7 @@ if (isset($_POST['submit'])) {
 
 						<div class="mb-6">
 							<label for="description" class="form-label"><strong>description</strong></label>
-							<textarea class="form-control" id="description" placeholder="" name="description" rows="3"></textarea>
+							<textarea class="form-control" id="description" placeholder="" name="description" rows="3" required></textarea>
 						</div>
 					</div>
 					<h1><strong> <a href="IndexContrat.php" class="btn btn-primary">retour</a>

@@ -25,6 +25,7 @@ if (isset($_POST['modifier'])) {
 
     $q = $conn->prepare("UPDATE `employes` SET `name`=?, `surname`=?, `age`=?, `sex`=?, `marital_status`=?, `id_role`=?, `mail`=?, `password`=?, `begin_date`=?, `desactivate`=?, `login`=?, `photo`=? WHERE id_employee=?");
     $q->execute(array($nom, $prenom, $age, $sex, $statut, $role, $email, $pass, $date, $fonction, $login, $photo, $id));
+    $_SESSION['erreur'] = "Employé modifier avec succes";
     header("Location: IndexEmployes.php");
 }
 
@@ -121,7 +122,7 @@ if (isset($_POST['modifier'])) {
                 <br><br>
                 <div class="form-action mb-3">
                     <button type="submit" class="btn btn-outline-success" name="modifier">modifier</button>
-                    <a href="index.php" class="btn btn-outline-primary">Revenir </a>
+                    <a href="indexEmployes.php" class="btn btn-outline-primary">Revenir </a>
                 </div>
             </div>
         </div>

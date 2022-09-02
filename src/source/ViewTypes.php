@@ -2,59 +2,50 @@
 require('./../view/includes/header.php');
 $_SESSION['title'] = "Detail sur un type de contrat";
 
-
-require('./../../core/Database/connection.php');
-$conn = (new Database())->getConnection();
-if (!empty($_GET['id_contract_type'])) {
-    $id_contract_type = checkInput($_GET['id_contract_type']);
-}
-$q = $conn->prepare("SElECT * FROM type_contrats WHERE id_contract_type=:id_contract_type ");
-$q->execute([
-    'id_contract_type' => $_GET['id']
-]);
-$type_contrats = $q->fetch(PDO::FETCH_ASSOC);
-function checkInput($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
 ?>
 
-<div class="container admin">
+<div class="container  col-lg-6">
     <div class="row">
-        <div class="col-lg-6 m-auto">
+        <div class="col-sm-12 m-auto">
             <h1><strong>Détails sur le type de contrat</strong></h1>
             <br>
-            <table class="table table-striped table-bordered">
+            <table class="table table-warning table-striped table-bordered border-dark" >
                 <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>nom type contrat</th>
+                        <th>description</th>
+                        <th> date de creation</th>
+                        <th> date de modification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    require('./../../core/Database/connection.php');
+                    
+                    $conn = (new Database())->getConnection();
+                    $q = $conn->prepare("SElECT * FROM type_contrats WHERE id_contract_type=:id_contract_type");
+                    $q->execute([
+                        'id_contract_type' => $_GET['id']
+                    ]);
+                    $type_contrat = $q->fetchall(PDO::FETCH_ASSOC);
 
-                    <form>
-                        <div class="form-groupe">
-                            <label><strong>nom type contrat :</strong></label><?= $type_contrats['contract_type_name']; ?>
-                        </div>
-                        <br>
-                        <div class="form-groupe">
-                            <label><strong>description :</strong></label><?= $type_contrats['description']; ?>
-                        </div>
-                        <br>
-                        <div class="form-groupe">
-                            <label><strong>date de creation :</strong></label><?= $type_contrats['creation_date']; ?>
-                        </div>
-                        <br>
-                        <div class="form-groupe">
-                            <label><strong>date de modification :</strong></label><?= $type_contrats['modification_date']; ?>
-
-                        </div><br><br>
-
-                        <a href="IndexTypes.php" class="btn btn-primary">retour</a>
+                    ?>
+                    <tr>
+                        <td><?= $type_contrat[0]['id_contract_type'] ?></td>
+                        <td><?= $type_contrat[0]['contract_type_name'] ?></td>
+                        <td><?= $type_contrat[0]['description'] ?></td>
+                        <td><?= $type_contrat[0]['creation_date'] ?></td>
+                        <td><?= $type_contrat[0]['modification_date'] ?></td>
+                    </tr>
 
 
-                    </form>
+                </tbody>
             </table>
+            <div class="form-actions">
+                        <a href="IndexTypes.php" class="btn btn-primary">Retour </a>
 
+                    </div>
         </div>
 
 

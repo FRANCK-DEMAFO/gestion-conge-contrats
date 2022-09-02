@@ -10,21 +10,20 @@ $conn = (new Database())->getConnection();
 if (isset($_POST['ajouter'])) {
   $contract_type_name = $_POST['nom_type_contrat'];
   $description = $_POST['description'];
-  $creation_date = $_POST['creation_date'];
-  $modification_date = $_POST['modification_date'];
 
-  $q = $conn->prepare(' INSERT INTO `type_contrats`(`contract_type_name`, `description`,`creation_date` , `modification_date`) VALUES (?,?,NOW(),?)');
-  $q->execute(array($contract_type_name, $description, $modification_date));
-
+  $q = $conn->prepare(' INSERT INTO `type_contrats`(`contract_type_name`, `description`) VALUES (?,?)');
+  $q->execute(array($contract_type_name, $description));
+  $_SESSION['erreur']='AJOUT DU TYPE DE CONTRAT REUSSIE AVEC SUCCES';
   header("location:IndexTypes.php");
 }
+
 
 
 ?>
 
 
 <div class="">
-  <form action="insert.php" method="post">
+  <form action="InsertTypes.php" method="post">
 
 
     <div class="row">

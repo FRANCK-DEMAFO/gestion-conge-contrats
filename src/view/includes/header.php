@@ -1,6 +1,9 @@
 <?php session_start();
 
 if (isset($_SESSION['pass']) && ($_SESSION['login'])) {
+  if($_SESSION['role']==2){
+    header('location: http://localhost:8090/gestion-conges-contrats/src/source/ProfilEmploye.php');
+  }
 } else {
 
   $_SESSION['erreur'] = "Veillez vous connecté !!!";
@@ -56,7 +59,6 @@ if (isset($_SESSION['pass']) && ($_SESSION['login'])) {
             <li class="navitems"><a href="./../source/IndexTypes.php" class="navlink"><i class="fas fa-book"></i>Types de contrat</a></li>
 
             <li class="navitems"><a href="./../source/IndexDemande.php" class="navlink"><i class="fas fa-calendar"></i>Demande Permission</a></li>
-            <li class="navitems"><a href="./../source/permission.php" class="navlink"><i class="fas fa-book"></i>Permission</a></li>
 
           </ul>
         </div>
@@ -69,7 +71,6 @@ if (isset($_SESSION['pass']) && ($_SESSION['login'])) {
             <li class="dropdown-header">
               <h5><?= ($_SESSION['name']) ?> <?= ($_SESSION['surname']) ?> </h5>
             </li>
-            <li class="list-group-item"><a class="dropdown-item" href="#"><i class="fas fa-user"></i>Mon profil profil</a></li>
             <li class="list-group-item"><a class="dropdown-item" name="deconnection" href="Deconnection.php"><i class="fa fa-external-link"></i>Deconnexion</a></li>
           </ul>
         </div>

@@ -43,9 +43,17 @@ $q->execute();
 $request2 = $q->fetchall(PDO::FETCH_OBJ);
 $nb_demande2 = count($request2);
 ?>
-<div class="container mt-60px">
-    <div class="pagetitle">
+<div class="container-fluid">
+    <div class="pagetitle"><br><br><br>
       <h1 class="text-logo" style="text-align: center; margin-top: -10px; background-color: brown;">Tableau de bord<br><br></h1><br><br>
+      <?php
+          if (!empty($_SESSION['erreur'])) {
+              echo '<div class="alert alert-success" role="alert" aria-label="Close">
+                      ' . $_SESSION['erreur'] . ' 
+                      </div>';
+              $_SESSION['erreur'] = "";
+          }
+         ?>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="./../../index.php">Accueil</a></li>

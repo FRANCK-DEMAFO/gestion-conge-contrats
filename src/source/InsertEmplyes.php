@@ -23,6 +23,7 @@ if(isset($_POST['ajouter'])){
     $q = $conn->prepare('INSERT INTO employes (name, surname, age, sex, marital_status, id_role, mail, password, begin_date, desactivate, login, photo) VALUES (?,?,?,?,?,?,?,?,NOW(),?,?,?)');
     $q->execute(array($nom,$prenom,$age, $sex, $statut,$role,$email, $pass, $fonction, $login, $photo));
     $conn = (new Database())->getConnection();
+    $_SESSION['erreur'] = "<center>Ajout reussi !!!</center>"; 
 
     header("Location: IndexEmployes.php");
 
@@ -98,7 +99,7 @@ if(isset($_POST['ajouter'])){
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Role</label>
                         <select class="form-control" id ="role" name = "role" required>
-                        <option selected></option>
+                        <option selected>Choisir un role</option>
                         <?php
                             $conn = (new Database())->getConnection();
                             foreach($conn->query('SELECT*FROM roles') as $row ){

@@ -19,13 +19,14 @@ $q->execute();
 
 if(isset($_POST['Modifier'])){
   $motif = htmlspecialchars ($_POST['motif']);
-  $cdate = htmlspecialchars ($_POST['cdate']); 
   $bdate = htmlspecialchars($_POST['bdate']);
   $edate = htmlspecialchars ($_POST['edate']);
   if(!empty($motif) && !empty($bdate) && !empty($edate) ){
   $id = $_GET['id'];
   $q = $conn->prepare("UPDATE `demande_permissions` SET `reason`=?,`creation_date`=NOW(),`depart_date`=?,`ending_date`=? WHERE id_request=?");
   $q->execute(array($motif,$bdate,$edate,$id));
+
+  $_SESSION['success'] = "<center>Demande modifiée avec success!</center>";
   header('Location:IndexDemande.php'); 
 }
 }
@@ -57,7 +58,8 @@ if(isset($_POST['Modifier'])){
                       <input type="date" class="form-control" value="<?php echo $result[0]['ending_date']; ?>" id="start" name="edate" >
                     </div>
                   
-                      <button type="submit" name="Modifier" class="btn btn-primary">Modifier</button>
+                      <button type="submit" name="Modifier" class="btn btn-outline-success">Modifier</button>
+                      <button type="submit" name="Modifier" class="btn btn-outline-primary">Retour</button>
                     </form>
             </div>
         </div>

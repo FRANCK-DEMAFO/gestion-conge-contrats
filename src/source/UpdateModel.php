@@ -19,7 +19,6 @@ if (isset($_GET['id'])) {
     $id_type_contrat = htmlspecialchars($_POST['id_type_contrat']);
     $name = htmlspecialchars($_POST['name']);
     $model = html_entity_decode($_POST['model']);
-    $date_creation = htmlspecialchars($_POST['date_creation']);
     if (!empty($id_type_contrat) && !empty($name) && !empty($model)) {
       $id = $_GET['id'];
       $q = $conn->prepare("UPDATE `models_contrats` SET `id_type_contrat`=?,`model_name`=?,`model`=?,`date_creation`= NOW() WHERE id_model=?");

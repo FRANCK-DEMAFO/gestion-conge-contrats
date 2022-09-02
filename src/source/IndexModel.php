@@ -10,6 +10,14 @@ $_SESSION['title'] = "Liste des model de contrat";
 
     <h2><strong> Liste des Models </strong><a href="InsertModel.php" class="btn btn-success btn-lg"><i class="fas fa-plus"></i> Ajouter</a>
     </h2>
+    <?php
+          if (!empty($_SESSION['erreur'])) {
+              echo '<div class="alert alert-success" role="alert" aria-label="Close">
+                      ' . $_SESSION['erreur'] . ' 
+                      </div>';
+              $_SESSION['erreur'] = "";
+          }
+         ?>
     <div class="table-responsive">
       <table class="table table-striped table-bordered" style="border-color: black;" id="model">
         <thead>
@@ -27,16 +35,16 @@ $_SESSION['title'] = "Liste des model de contrat";
 
           require('./../../core/Database/connection.php');
           $conn = (new Database())->getConnection();
-          $q = $conn->prepare("SELECT models_contrats.id_model, models_contrats.model_name, models_contrats.model, models_contrats.deleted, models_contrats.date_creation,
-        type_contrats.contract_type_name, type_contrats.id_contract_type FROM models_contrats LEFT JOIN type_contrats ON models_contrats.id_type_contrat=type_contrats.id_contract_type WHERE deleted=1");
+          $q = $conn->prepare("SELECT models_contrats.id_model,type_contrats.contract_type_name AS id_type_contrat  , models_contrats.model_name, models_contrats.model, models_contrats.deleted,
+          models_contrats.date_creation FROM models_contrats LEFT JOIN type_contrats ON models_contrats.id_type_contrat  =type_contrats.id_contract_type   WHERE deleted = 1");
           $q->execute();
           foreach ($q as $models_contrat) {
           ?>
             <tr>
               <td><?= $models_contrat['id_model'] ?> </td>
-              <td><?= $models_contrat['id_contract_type'] ?> </td>
+              <td><?= $models_contrat['id_type_contrat'] ?> </td>
               <td><?= $models_contrat['model_name'] ?> </td>
-              <td><?= $models_contrat['date_creation'] ?></td>
+              <td><?= $models_contrat['date_creation'] ?> </td>
               <td width=180>
                 <a class="btn btn-light" href="ViewModel.php?id=<?= $models_contrat['id_model'] ?>"><i class=" fas fa-eye"></i></a>
 

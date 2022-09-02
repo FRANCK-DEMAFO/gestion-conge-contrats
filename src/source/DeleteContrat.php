@@ -1,4 +1,6 @@
 <?php
+require('./../view/includes/header.php');
+$_SESSION['title'] = "supprimer un contrat";
 
 require('./../../core/Database/connection.php');
 $conn = (new Database())->getConnection();
@@ -9,9 +11,13 @@ $conn = (new Database())->getConnection();
         $id= $_GET['id'];
         $q = $conn->prepare("UPDATE contrats  SET deleted=? WHERE id_contract=?;");
         $q->execute(array(1,$id));
+        $_SESSION['erreur']='supression reussi';
+        
+   
         
     }
-     $result = $q->fetch(PDO::FETCH_OBJ) ;  
+     
+    $_SESSION['erreur']='<center>suppression reussi</center>';
 
     header("Location: IndexContrat.php");
 ?>

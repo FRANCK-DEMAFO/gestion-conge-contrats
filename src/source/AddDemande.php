@@ -6,7 +6,6 @@ $conn = (new Database())->getConnection();
 $motif = $cdate = $bdate = $edate = "";
 if (isset($_POST['creer'])) {
     $motif = htmlspecialchars($_POST['motif']);
-    $cdate = htmlspecialchars($_POST['cdate']);
     $bdate = htmlspecialchars($_POST['bdate']);
     $edate = htmlspecialchars($_POST['edate']);
     $name = htmlspecialchars($_POST['name']);
@@ -15,7 +14,7 @@ if (isset($_POST['creer'])) {
         $q->execute(array($motif, $bdate, $edate, $name));
     }
 
-
+    $_SESSION['success'] = "<center>Demande ajoutée avec success!</center>";
 
     header('Location:IndexDemande.php');
 }
@@ -33,7 +32,7 @@ if (isset($_POST['creer'])) {
                         <h4>Nom</h4>
                     </label>
                     <select class="form-control" id="name" name="name" required>
-                        <option selected></option>
+                        <option value="">Choisir un employé</option>
                         <?php
                         $conn = (new Database())->getConnection();
                         foreach ($conn->query('SELECT * FROM employes') as $row) {
@@ -63,8 +62,11 @@ if (isset($_POST['creer'])) {
                     <input type="date" id="Edate" name="edate" class="form-control">
                 </div> <br />
 
-                <button class="btn btn-primary" type="submit" name="creer">
-                    <h4>Creer</h4>
+                <button class="btn btn-outline-success" type="submit" name="creer">
+                 <h4>Creer</h4>
+                </button>
+                <button class="btn btn-outline-primary" type="submit" name="creer">
+                    <h4>Retour</h4>
                 </button>
             </form>
         </div>
