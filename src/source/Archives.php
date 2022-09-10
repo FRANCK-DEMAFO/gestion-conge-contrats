@@ -38,10 +38,9 @@ require_once('./../view/includes/header.php');
 
 
                         $sql = "SElECT conges.id_leave, conges.leave_start_date, conges.annee, conges.leave_days, conges.used_days, conges.statut, conges.leave_duration, conges.id_employee,
-                        employes.name FROM conges LEFT JOIN employes ON conges.id_employee=employes.id_employee WHERE conges.disable = :disable AND conges.annee = :annee ";
+                        employes.name FROM conges LEFT JOIN employes ON conges.id_employee=employes.id_employee WHERE conges.annee = :annee ";
 
                         $query = $conn->prepare($sql);
-                        $query->bindValue(':disable', 1, \PDO::PARAM_INT);
                         $query->bindValue(':annee', $annee, \PDO::PARAM_INT);
                         $query->execute();
                         $conges = $query->fetchAll();

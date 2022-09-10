@@ -25,7 +25,7 @@ require_once('./../view/includes/header.php');
                   document.querySelector("input[type=number]")
                     .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
                 </script>
-                <input class="form-control" type="number" placeholder="yy" min="2022" max="2100" id="annee" name="annee" required>
+                <input class="form-control" type="number" placeholder="yy" min="2020" max="2100" id="annee" name="annee" required>
                 <button class="btn btn-success" type="submit" name="envoyer">envoyer</button>
                 <button class="btn btn-primary" data-bs-dismiss="modal"><a href="index.php">retour</a></button>
               </div>
@@ -88,7 +88,7 @@ require_once('./../view/includes/header.php');
               <td><?= $conge['leave_start_date'] ?></td>
               <td style="text-align: center;"><?= $conge['leave_days'] ?></td>
               <td style="text-align: center;"><?= $conge['leave_duration'] ?></td>
-              <td style="text-align: center;"><?= $diff = $conge['leave_days'] - ($conge['used_days']) - $conge['leave_duration']; ?></td>
+              <td style="text-align: center;"><?= $diff = $conge['leave_days'] - $conge['used_days'] - $conge['leave_duration'] ?></td>
 
               <td width=160>
                 <a class="btn btn-light" href="view.php?id=<?= $conge['id_leave'] ?>"><i class="fas fa-eye"></i> </a>
