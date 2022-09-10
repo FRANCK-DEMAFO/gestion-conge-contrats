@@ -43,7 +43,7 @@ mysql > source config/schema/gestion_conges_contrats.sql;
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => '',
+    'database' => 'gestion_conges_contrats',
 ],
 ```
 
